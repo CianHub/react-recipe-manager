@@ -1,6 +1,6 @@
 import React from 'react';
 import Recipe from '../Display/Recipe';
-import { RecipeType } from '../Types/RecipeType.model';
+import { RecipeType } from '../../Types/RecipeType.model';
 
 interface Props {
   recipes: RecipeType[];

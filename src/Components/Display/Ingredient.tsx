@@ -1,5 +1,5 @@
 import React from 'react';
-import { IngredientType } from '../Types/IngredientType.model';
+import { IngredientType } from '../../Types/IngredientType.model';
 
 interface Props {
   ingredient: IngredientType;

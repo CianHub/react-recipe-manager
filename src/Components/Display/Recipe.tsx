@@ -1,5 +1,5 @@
 import React from 'react';
-import { RecipeType } from '../Types/RecipeType.model';
+import { RecipeType } from '../../Types/RecipeType.model';
 import IngredientList from './IngredientList';
 
 import '../../App.css';
