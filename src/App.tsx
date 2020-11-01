@@ -94,8 +94,6 @@ function App() {
 
   const selectRecipe = (id: number): void => setSelectedRecipeId(id);
 
-  console.log(selectedRecipe);
-
   const recipeContext = {
     addRecipe,
     deleteRecipe,
@@ -106,7 +104,7 @@ function App() {
     <RecipeUpdateContext.Provider value={recipeContext}>
       <div className="App">
         <RecipeList recipes={recipes} />
-        <RecipeEdit recipe={selectedRecipe as RecipeType} />
+        {selectedRecipe && <RecipeEdit recipe={selectedRecipe as RecipeType} />}
       </div>
     </RecipeUpdateContext.Provider>
   );
