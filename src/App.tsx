@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import RecipeEdit from './Components/Containers/RecipeEdit';
 import RecipeList from './Components/Containers/RecipeList';
 import { RecipeType } from './Types/RecipeType.model';
 
@@ -63,7 +64,7 @@ function App() {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(recipes));
   }, [recipes]);
 
-  const addRecipe = () =>
+  const addRecipe = (): void =>
     setRecipes([
       ...recipes,
       {
@@ -82,7 +83,7 @@ function App() {
       },
     ]);
 
-  const deleteRecipe = (id: number) =>
+  const deleteRecipe = (id: number): void =>
     setRecipes(recipes.filter((recipe) => recipe.id !== id));
 
   const recipeContextValue = {
@@ -94,6 +95,7 @@ function App() {
     <RecipeUpdateContext.Provider value={recipeContextValue}>
       <div className="App">
         <RecipeList recipes={recipes} />
+        <RecipeEdit />
       </div>
     </RecipeUpdateContext.Provider>
   );

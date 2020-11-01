@@ -2,6 +2,7 @@
 *::before,
 *::after {
   font-family: 'Roboto';
+  box-sizing: border-box;
 }
 
 html {
@@ -107,4 +108,15 @@ body {
 
 .recipe__instructions {
   white-space: pre-wrap;
+}
+
+.recipe-edit {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 40%;
+  max-height: 100%;
+  overflow-y: auto;
+  padding: 30px;
+  padding-top: 10px;
 }
