@@ -2,40 +2,41 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import RecipeEdit from './Components/Containers/RecipeEdit';
 import RecipeList from './Components/Containers/RecipeList';
+import { idGen } from './Helpers/helpers';
 import { RecipeType } from './Types/RecipeType.model';
 
 const LOCAL_STORAGE_KEY = 'reactRecipes.recipes';
 
 export const mockRecipes: RecipeType[] = [
   {
-    id: 1,
+    id: idGen(),
     name: 'Plain Chicken',
     servings: 3,
     cookTime: '1:45',
     instructions: '1: Salt on chicken\n2: Cook chicken\n3: Eat chicken',
     ingredients: [
       {
-        id: 1,
+        id: idGen(),
         name: 'Chicken',
         amount: '2 entire chickens',
       },
-      { id: 2, name: 'salt', amount: 'a lot' },
+      { id: idGen(), name: 'salt', amount: 'a lot' },
     ],
   },
   {
-    id: 2,
+    id: idGen(),
     name: 'Plain Pork',
     servings: 3,
     cookTime: '1:45',
     instructions: '1: Paprika on pork\n2: Cook pork\n3: Eat pork',
     ingredients: [
       {
-        id: 3,
+        id: idGen(),
         name: 'Pork',
         amount: '2 entire pigs',
       },
       {
-        id: 4,
+        id: idGen(),
         name: 'Paprika',
         amount: 'a little',
       },
@@ -45,9 +46,9 @@ export const mockRecipes: RecipeType[] = [
 
 export const RecipeUpdateContext = React.createContext<{
   addRecipe: () => void;
-  deleteRecipe: (id: number) => void;
-  selectRecipe: (id: number) => void;
-  handleRecipeChange: (id: number, recipe: RecipeType) => void;
+  deleteRecipe: (id: string) => void;
+  selectRecipe: (id: string) => void;
+  handleRecipeChange: (id: string, recipe: RecipeType) => void;
 }>({
   addRecipe: () => {},
   deleteRecipe: () => {},
@@ -57,7 +58,7 @@ export const RecipeUpdateContext = React.createContext<{
 
 function App() {
   const [recipes, setRecipes] = useState(mockRecipes);
-  const [selectedRecipeId, setSelectedRecipeId] = useState<number>();
+  const [selectedRecipeId, setSelectedRecipeId] = useState<string>();
 
   useEffect(() => {
     if (localStorage.getItem(LOCAL_STORAGE_KEY)) {
@@ -77,14 +78,14 @@ function App() {
   );
 
   const addRecipe = (): void => {
-    const newRecipe = {
-      id: recipes.length + 2,
+    const newRecipe: RecipeType = {
+      id: idGen(),
       name: '',
       servings: 0,
       cookTime: '',
       ingredients: [
         {
-          id: 1,
+          id: idGen(),
           name: '',
           amount: '',
         },
@@ -96,16 +97,16 @@ function App() {
     selectRecipe(newRecipe.id);
   };
 
-  const deleteRecipe = (id: number): void => {
+  const deleteRecipe = (id: string): void => {
     if (selectedRecipeId !== null && selectedRecipeId === id) {
-      setSelectedRecipeId(0);
+      setSelectedRecipeId('');
     }
     setRecipes(recipes.filter((recipe) => recipe.id !== id));
   };
 
-  const selectRecipe = (id: number): void => setSelectedRecipeId(id);
+  const selectRecipe = (id: string): void => setSelectedRecipeId(id);
 
-  const handleRecipeChange = (id: number, recipe: RecipeType) => {
+  const handleRecipeChange = (id: string, recipe: RecipeType) => {
     const newRecipes = [...recipes];
     const index = newRecipes.findIndex(
       (recipeFound: RecipeType) => recipeFound.id === id

@@ -1,4 +1,5 @@
 import React from 'react';
+import { idGen } from '../../Helpers/helpers';
 import { IngredientType } from '../../Types/IngredientType.model';
 import Ingredient from './Ingredient';
 
@@ -10,7 +11,7 @@ const IngredientList: React.FC<Props> = ({ ingredients }) => {
   return (
     <div className="ingredient-grid">
       {ingredients.map((ingredient: IngredientType) => (
-        <Ingredient key={ingredient.id} ingredient={ingredient} />
+        <Ingredient key={idGen()} ingredient={ingredient} />
       ))}
     </div>
   );

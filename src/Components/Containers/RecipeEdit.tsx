@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { RecipeUpdateContext } from '../../App';
+import { idGen } from '../../Helpers/helpers';
 import { IngredientType } from '../../Types/IngredientType.model';
 import { RecipeType } from '../../Types/RecipeType.model';
 import RecipeEditIngredient from '../Display/RecipeIngredientEdit';
@@ -13,7 +14,7 @@ const RecipeEdit: React.FC<Props> = ({ recipe }) => {
 
   const { handleRecipeChange, selectRecipe } = useContext(RecipeUpdateContext);
 
-  const handleIngredientChange = (id: number, ingredient: IngredientType) => {
+  const handleIngredientChange = (id: string, ingredient: IngredientType) => {
     const newIngredients = [...ingredients];
     const index = newIngredients.findIndex(
       (ingFound: IngredientType) => ingFound.id === id
@@ -30,14 +31,14 @@ const RecipeEdit: React.FC<Props> = ({ recipe }) => {
 
   const addIngredient = () => {
     const newIng: IngredientType = {
-      id: ingredients.length + 2,
+      id: idGen(),
       name: '',
       amount: '',
     };
     handleChange({ ingredients: [...ingredients, newIng] });
   };
 
-  const deleteIngredient = (id: number) => {
+  const deleteIngredient = (id: string) => {
     const newIngs = ingredients.filter((ing: IngredientType) => ing.id !== id);
     handleChange({ ingredients: [...newIngs] });
   };
@@ -47,7 +48,7 @@ const RecipeEdit: React.FC<Props> = ({ recipe }) => {
       <div className="recipe-edit__remove-button-container">
         <button
           className="btn recipe-edit__remove-button"
-          onClick={() => selectRecipe(0)}
+          onClick={() => selectRecipe('')}
         >
           &times;
         </button>
@@ -107,7 +108,7 @@ const RecipeEdit: React.FC<Props> = ({ recipe }) => {
         {ingredients.map((ingredient: IngredientType) => (
           <RecipeEditIngredient
             ingredient={ingredient}
-            key={ingredient.id + ingredient.name}
+            key={idGen()}
             handleIngredientChange={handleIngredientChange}
             deleteIngredient={deleteIngredient}
           />

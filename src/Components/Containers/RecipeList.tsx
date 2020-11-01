@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Recipe from '../Display/Recipe';
 import { RecipeType } from '../../Types/RecipeType.model';
 import { RecipeUpdateContext } from '../../App';
+import { idGen } from '../../Helpers/helpers';
 
 interface Props {
   recipes: RecipeType[];
@@ -14,7 +15,7 @@ const RecipeList: React.FC<Props> = ({ recipes }) => {
     <div className="recipe-list">
       <div>
         {recipes.map((recipe: RecipeType) => (
-          <Recipe key={recipe.id + recipe.name} recipe={recipe} />
+          <Recipe key={idGen()} recipe={recipe} />
         ))}
       </div>
       <div className="recipe-list__add-recipe-btn-container">

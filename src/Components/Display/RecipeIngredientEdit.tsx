@@ -3,8 +3,8 @@ import { IngredientType } from '../../Types/IngredientType.model';
 
 interface Props {
   ingredient: IngredientType;
-  handleIngredientChange: (id: number, ingredient: IngredientType) => void;
-  deleteIngredient: (id: number) => void;
+  handleIngredientChange: (id: string, ingredient: IngredientType) => void;
+  deleteIngredient: (id: string) => void;
 }
 
 const RecipeEditIngredient: React.FC<Props> = ({
