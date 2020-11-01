@@ -11,7 +11,7 @@ interface Props {
 const RecipeEdit: React.FC<Props> = ({ recipe }) => {
   const { name, ingredients, instructions, cookTime, id, servings } = recipe;
 
-  const { handleRecipeChange } = useContext(RecipeUpdateContext);
+  const { handleRecipeChange, selectRecipe } = useContext(RecipeUpdateContext);
 
   const handleIngredientChange = (id: number, ingredient: IngredientType) => {
     const newIngredients = [...ingredients];
@@ -31,7 +31,12 @@ const RecipeEdit: React.FC<Props> = ({ recipe }) => {
   return (
     <div className="recipe-edit">
       <div className="recipe-edit__remove-button-container">
-        <button className="btn recipe-edit__remove-button">&times;</button>
+        <button
+          className="btn recipe-edit__remove-button"
+          onClick={() => selectRecipe(0)}
+        >
+          &times;
+        </button>
       </div>
       <div className="recipe-edit__details-grid">
         <label htmlFor="name" className="recipe-edit__label">
