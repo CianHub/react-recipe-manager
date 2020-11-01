@@ -29,7 +29,6 @@ export const recipeReducer: React.Reducer<RecipeState, Action> = (
       );
 
       return {
-        ...state,
         recipes: [...editRecipeState, editRecipeAction.payload.recipe],
       };
 
@@ -38,9 +37,9 @@ export const recipeReducer: React.Reducer<RecipeState, Action> = (
       const deleteRecipeState = state.recipes.filter(
         (recipe: RecipeType) => recipe.id !== deleteRecipeAction.payload.id
       );
-      return { ...state, recipes: [deleteRecipeState] };
+      return { ...state, recipes: [...deleteRecipeState] };
 
     default:
-      state;
+      return state;
   }
 };
