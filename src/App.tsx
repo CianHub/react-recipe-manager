@@ -96,8 +96,12 @@ function App() {
     selectRecipe(newRecipe.id);
   };
 
-  const deleteRecipe = (id: number): void =>
+  const deleteRecipe = (id: number): void => {
+    if (selectedRecipeId !== null && selectedRecipeId === id) {
+      setSelectedRecipeId(0);
+    }
     setRecipes(recipes.filter((recipe) => recipe.id !== id));
+  };
 
   const selectRecipe = (id: number): void => setSelectedRecipeId(id);
 
