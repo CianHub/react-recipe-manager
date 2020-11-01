@@ -4,9 +4,10 @@ import { RecipeType } from '../Types/RecipeType.model';
 
 interface Props {
   recipes: RecipeType[];
+  addRecipe: () => void;
 }
 
-const RecipeList: React.FC<Props> = ({ recipes }) => {
+const RecipeList: React.FC<Props> = ({ recipes, addRecipe }) => {
   return (
     <div className="recipe-list">
       <div>
@@ -15,7 +16,9 @@ const RecipeList: React.FC<Props> = ({ recipes }) => {
         ))}
       </div>
       <div className="recipe-list__add-recipe-btn-container">
-        <button className="btn btn--primary">Add Recipe</button>
+        <button className="btn btn--primary" onClick={() => addRecipe()}>
+          Add Recipe
+        </button>
       </div>
     </div>
   );

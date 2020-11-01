@@ -1,12 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import RecipeList from './Components/Containers/RecipeList';
 import { RecipeType } from './Components/Types/RecipeType.model';
 
 function App() {
+  const [recipes, setRecipes] = useState(mockRecipes);
+
+  const handleAddRecipe = (): void => {
+    const newRecipe: RecipeType = {
+      id: RecipeList.length + 1,
+      name: 'Name',
+      servings: 1,
+      cookTime: '1:00',
+      ingredients: [
+        {
+          id: 1,
+          name: 'Chicken',
+          amount: '2 entire chickens',
+        },
+      ],
+      instructions: 'instruct',
+    };
+
+    setRecipes([...recipes, newRecipe]);
+  };
+
   return (
     <div className="App">
-      <RecipeList recipes={mockRecipes} />
+      <RecipeList recipes={recipes} addRecipe={handleAddRecipe} />
     </div>
   );
 }
