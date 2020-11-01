@@ -4,11 +4,13 @@ import { IngredientType } from '../../Types/IngredientType.model';
 interface Props {
   ingredient: IngredientType;
   handleIngredientChange: (id: number, ingredient: IngredientType) => void;
+  deleteIngredient: (id: number) => void;
 }
 
 const RecipeEditIngredient: React.FC<Props> = ({
   ingredient,
   handleIngredientChange,
+  deleteIngredient,
 }) => {
   const { id, name, amount } = ingredient;
 
@@ -36,7 +38,9 @@ const RecipeEditIngredient: React.FC<Props> = ({
         name="amount"
         onChange={(e) => handleChange({ [e.target.name]: e.target.value })}
       />
-      <button className="btn btn--danger">&times;</button>
+      <button className="btn btn--danger" onClick={() => deleteIngredient(id)}>
+        &times;
+      </button>
     </>
   );
 };

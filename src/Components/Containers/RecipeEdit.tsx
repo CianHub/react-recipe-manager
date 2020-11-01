@@ -37,6 +37,11 @@ const RecipeEdit: React.FC<Props> = ({ recipe }) => {
     handleChange({ ingredients: [...ingredients, newIng] });
   };
 
+  const deleteIngredient = (id: number) => {
+    const newIngs = ingredients.filter((ing: IngredientType) => ing.id !== id);
+    handleChange({ ingredients: [...newIngs] });
+  };
+
   return (
     <div className="recipe-edit">
       <div className="recipe-edit__remove-button-container">
@@ -104,6 +109,7 @@ const RecipeEdit: React.FC<Props> = ({ recipe }) => {
             ingredient={ingredient}
             key={ingredient.id + ingredient.name}
             handleIngredientChange={handleIngredientChange}
+            deleteIngredient={deleteIngredient}
           />
         ))}
       </div>
