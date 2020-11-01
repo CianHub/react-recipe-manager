@@ -1,25 +1,26 @@
 import React from 'react';
+import { RecipeType } from '../Types/RecipeType.model';
 
-interface Props {}
+interface Props {
+  recipe: RecipeType;
+}
 
-const Recipe: React.FC<Props> = () => {
+const Recipe: React.FC<Props> = ({ recipe }) => {
   return (
     <div>
       <div>
-        <h3>Plain Chicken</h3>
+        <h3>{recipe.name}</h3>
         <div>
           <button>Edit</button>
           <button>Delete</button>
         </div>
         <div>
           <span>Servings:</span>
-          <span>3</span>
+          <span>{recipe.servings}</span>
         </div>
         <div>
           <span>Instructions:</span>
-          <div>1: Salt on chicken</div>
-          <div>2: Cook Chicken</div>
-          <div>3: Eat Chicken</div>
+          <div>{recipe.instructions}</div>
         </div>
       </div>
     </div>

@@ -1,13 +1,17 @@
 import React from 'react';
 import Recipe from '../Display/Recipe';
+import { RecipeType } from '../Types/RecipeType.model';
 
-interface Props {}
+interface Props {
+  recipes: RecipeType[];
+}
 
-const RecipeList: React.FC<Props> = () => {
+const RecipeList: React.FC<Props> = ({ recipes }) => {
   return (
     <div>
-      <Recipe />
-      <Recipe />
+      {recipes.map((recipe: RecipeType) => (
+        <Recipe key={recipe.id + recipe.name} recipe={recipe} />
+      ))}
     </div>
   );
 };
