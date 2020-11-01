@@ -5,7 +5,7 @@
 }
 
 html {
-  font-size: 25px;
+  font-size: 20px;
 }
 
 body {
@@ -20,7 +20,7 @@ body {
 .recipe-list {
   border-right: 1px solid black;
   min-height: 100vh;
-  width: 50%;
+  width: 60%;
 }
 
 .recipe-list__add-recipe-btn-container {
@@ -74,7 +74,6 @@ body {
 
 .recipe:last-child {
   border-bottom: none;
-  padding-bottom: 10px;
 }
 
 .recipe__header {
