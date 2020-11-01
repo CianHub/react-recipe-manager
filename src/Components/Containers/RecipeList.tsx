@@ -8,10 +8,15 @@ interface Props {
 
 const RecipeList: React.FC<Props> = ({ recipes }) => {
   return (
-    <div>
-      {recipes.map((recipe: RecipeType) => (
-        <Recipe key={recipe.id + recipe.name} recipe={recipe} />
-      ))}
+    <div className="recipe-list">
+      <div>
+        {recipes.map((recipe: RecipeType) => (
+          <Recipe key={recipe.id + recipe.name} recipe={recipe} />
+        ))}
+      </div>
+      <div className="recipe-list__add-recipe-btn-container">
+        <button className="btn btn--primary">Add Recipe</button>
+      </div>
     </div>
   );
 };

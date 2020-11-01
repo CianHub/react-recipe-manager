@@ -8,7 +8,7 @@ interface Props {
 
 const IngredientList: React.FC<Props> = ({ ingredients }) => {
   return (
-    <div>
+    <div className="ingredient-grid">
       {ingredients.map((ingredient: IngredientType) => (
         <Ingredient key={ingredient.id} ingredient={ingredient} />
       ))}
