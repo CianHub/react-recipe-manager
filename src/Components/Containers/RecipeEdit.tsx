@@ -13,6 +13,15 @@ const RecipeEdit: React.FC<Props> = ({ recipe }) => {
 
   const { handleRecipeChange } = useContext(RecipeUpdateContext);
 
+  const handleIngredientChange = (id: number, ingredient: IngredientType) => {
+    const newIngredients = [...ingredients];
+    const index = newIngredients.findIndex(
+      (ingFound: IngredientType) => ingFound.id === id
+    );
+    newIngredients[index] = ingredient;
+    handleChange({ ingredients: newIngredients });
+  };
+
   const handleChange = (newValue: any): void =>
     handleRecipeChange(id, {
       ...recipe,
@@ -77,7 +86,11 @@ const RecipeEdit: React.FC<Props> = ({ recipe }) => {
         <div>Amount</div>
         <div></div>
         {ingredients.map((ingredient: IngredientType) => (
-          <RecipeEditIngredient ingredient={ingredient} />
+          <RecipeEditIngredient
+            ingredient={ingredient}
+            key={ingredient.id + ingredient.name}
+            handleIngredientChange={handleIngredientChange}
+          />
         ))}
       </div>
       <div className="recipe-edit__add-ingredient-btn-container">
