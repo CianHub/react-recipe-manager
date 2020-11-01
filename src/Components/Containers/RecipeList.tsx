@@ -5,10 +5,10 @@ interface Props {}
 
 const RecipeList: React.FC<Props> = () => {
   return (
-    <Recipe>
+    <div>
       <Recipe />
       <Recipe />
-    </Recipe>
+    </div>
   );
 };
 
