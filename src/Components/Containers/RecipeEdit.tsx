@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { RecipeUpdateContext } from '../../App';
 import { IngredientType } from '../../Types/IngredientType.model';
 import { RecipeType } from '../../Types/RecipeType.model';
@@ -13,15 +13,11 @@ const RecipeEdit: React.FC<Props> = ({ recipe }) => {
 
   const { handleRecipeChange } = useContext(RecipeUpdateContext);
 
-  const handleChange = (
-    event:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-  ): void => {
-    const updatedVal = { [event.target.name]: event.target.value };
-    const updatedRecipe = { ...recipe, ...updatedVal };
-    handleRecipeChange(id, updatedRecipe);
-  };
+  const handleChange = (newValue: any): void =>
+    handleRecipeChange(id, {
+      ...recipe,
+      ...newValue,
+    });
 
   return (
     <div className="recipe-edit">
@@ -38,7 +34,7 @@ const RecipeEdit: React.FC<Props> = ({ recipe }) => {
           id="name"
           className="recipe-edit__input"
           value={name}
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => handleChange({ [e.target.name]: e.target.value })}
         />
         <label htmlFor="cookTime" className="recipe-edit__label">
           Cook Time
@@ -49,7 +45,7 @@ const RecipeEdit: React.FC<Props> = ({ recipe }) => {
           id="cookTime"
           className="recipe-edit__input"
           value={cookTime}
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => handleChange({ [e.target.name]: e.target.value })}
         />
         <label htmlFor="servings" className="recipe-edit__label">
           Servings
@@ -61,7 +57,7 @@ const RecipeEdit: React.FC<Props> = ({ recipe }) => {
           id="servings"
           className="recipe-edit__input"
           value={servings}
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => handleChange({ [e.target.name]: +e.target.value })}
         />
         <label htmlFor="instructions" className="recipe-edit__label">
           Instructions
@@ -71,7 +67,7 @@ const RecipeEdit: React.FC<Props> = ({ recipe }) => {
           className="recipe-edit__input"
           id="instructions"
           value={instructions}
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => handleChange({ [e.target.name]: e.target.value })}
         ></textarea>
       </div>
       <br />
