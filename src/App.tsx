@@ -47,7 +47,13 @@ export const RecipeUpdateContext = React.createContext<{
   addRecipe: () => void;
   deleteRecipe: (id: number) => void;
   selectRecipe: (id: number) => void;
-}>({ addRecipe: () => {}, deleteRecipe: () => {}, selectRecipe: () => {} });
+  handleRecipeChange: (id: number, recipe: RecipeType) => void;
+}>({
+  addRecipe: () => {},
+  deleteRecipe: () => {},
+  selectRecipe: () => {},
+  handleRecipeChange: () => {},
+});
 
 function App() {
   const [recipes, setRecipes] = useState(mockRecipes);
@@ -94,10 +100,20 @@ function App() {
 
   const selectRecipe = (id: number): void => setSelectedRecipeId(id);
 
+  const handleRecipeChange = (id: number, recipe: RecipeType) => {
+    const newRecipes = [...recipes];
+    const index = newRecipes.findIndex(
+      (recipeFound: RecipeType) => recipeFound.id === id
+    );
+    newRecipes[index] = recipe;
+    setRecipes(newRecipes);
+  };
+
   const recipeContext = {
     addRecipe,
     deleteRecipe,
     selectRecipe,
+    handleRecipeChange,
   };
 
   return (
