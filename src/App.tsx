@@ -79,17 +79,17 @@ function App() {
   const addRecipe = (): void => {
     const newRecipe = {
       id: recipes.length + 2,
-      name: 'Name',
-      servings: 1,
-      cookTime: '1:00',
+      name: '',
+      servings: 0,
+      cookTime: '',
       ingredients: [
         {
           id: 1,
-          name: 'Chicken',
-          amount: '2 entire chickens',
+          name: '',
+          amount: '',
         },
       ],
-      instructions: 'instruct',
+      instructions: '',
     };
 
     setRecipes([...recipes, newRecipe]);

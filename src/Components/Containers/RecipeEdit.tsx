@@ -28,6 +28,15 @@ const RecipeEdit: React.FC<Props> = ({ recipe }) => {
       ...newValue,
     });
 
+  const addIngredient = () => {
+    const newIng: IngredientType = {
+      id: ingredients.length + 2,
+      name: '',
+      amount: '',
+    };
+    handleChange({ ingredients: [...ingredients, newIng] });
+  };
+
   return (
     <div className="recipe-edit">
       <div className="recipe-edit__remove-button-container">
@@ -99,7 +108,9 @@ const RecipeEdit: React.FC<Props> = ({ recipe }) => {
         ))}
       </div>
       <div className="recipe-edit__add-ingredient-btn-container">
-        <button className="btn btn--primary">Add Ingredient</button>
+        <button className="btn btn--primary" onClick={() => addIngredient()}>
+          Add Ingredient
+        </button>
       </div>
     </div>
   );
