@@ -1,12 +1,13 @@
 import React from 'react';
 import { RecipeType } from '../Types/RecipeType.model';
+import IngredientList from './IngredientList';
 
 interface Props {
   recipe: RecipeType;
 }
 
 const Recipe: React.FC<Props> = ({
-  recipe: { name, servings, instructions },
+  recipe: { name, servings, instructions, ingredients },
 }) => {
   return (
     <div>
@@ -23,6 +24,10 @@ const Recipe: React.FC<Props> = ({
         <div>
           <span>Instructions:</span>
           <div>{instructions}</div>
+        </div>
+        <div>
+          <span>Ingredients:</span>
+          <IngredientList ingredients={ingredients} />
         </div>
       </div>
     </div>
