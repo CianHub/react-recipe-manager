@@ -1,41 +1,14 @@
 import React, { useContext } from 'react';
 import Recipe from '../Display/Recipe';
 import { RecipeType } from '../../Types/RecipeType.model';
-import { RecipeContext } from '../../Context/RecipeContext/RecipeContext';
-import {
-  ADD_RECIPE,
-  DELETE_RECIPE,
-} from '../../Context/RecipeContext/RecipeActions';
+import { RecipeUpdateContext } from '../../App';
 
-const RecipeList: React.FC = () => {
-  const {
-    state: { recipes },
-    dispatch,
-  } = useContext(RecipeContext);
+interface Props {
+  recipes: RecipeType[];
+}
 
-  const addRecipe = () =>
-    dispatch({
-      type: ADD_RECIPE,
-      payload: {
-        recipe: {
-          id: RecipeList.length + 2,
-          name: 'Name',
-          servings: 1,
-          cookTime: '1:00',
-          ingredients: [
-            {
-              id: 1,
-              name: 'Chicken',
-              amount: '2 entire chickens',
-            },
-          ],
-          instructions: 'instruct',
-        },
-      },
-    });
-
-  const deleteRecipe = (id: number) =>
-    dispatch({ type: DELETE_RECIPE, payload: { id } });
+const RecipeList: React.FC<Props> = ({ recipes }) => {
+  const { addRecipe, deleteRecipe } = useContext(RecipeUpdateContext);
 
   return (
     <div className="recipe-list">
