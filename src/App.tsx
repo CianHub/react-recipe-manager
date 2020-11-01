@@ -76,24 +76,25 @@ function App() {
     (recipe: RecipeType) => recipe.id === selectedRecipeId
   );
 
-  const addRecipe = (): void =>
-    setRecipes([
-      ...recipes,
-      {
-        id: recipes.length + 2,
-        name: 'Name',
-        servings: 1,
-        cookTime: '1:00',
-        ingredients: [
-          {
-            id: 1,
-            name: 'Chicken',
-            amount: '2 entire chickens',
-          },
-        ],
-        instructions: 'instruct',
-      },
-    ]);
+  const addRecipe = (): void => {
+    const newRecipe = {
+      id: recipes.length + 2,
+      name: 'Name',
+      servings: 1,
+      cookTime: '1:00',
+      ingredients: [
+        {
+          id: 1,
+          name: 'Chicken',
+          amount: '2 entire chickens',
+        },
+      ],
+      instructions: 'instruct',
+    };
+
+    setRecipes([...recipes, newRecipe]);
+    selectRecipe(newRecipe.id);
+  };
 
   const deleteRecipe = (id: number): void =>
     setRecipes(recipes.filter((recipe) => recipe.id !== id));
