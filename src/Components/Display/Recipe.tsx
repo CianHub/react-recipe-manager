@@ -5,10 +5,12 @@ import IngredientList from './IngredientList';
 import '../../App.css';
 interface Props {
   recipe: RecipeType;
+  deleteRecipe: (id: number) => void;
 }
 
 const Recipe: React.FC<Props> = ({
-  recipe: { name, servings, cookTime, instructions, ingredients },
+  recipe: { id, name, servings, cookTime, instructions, ingredients },
+  deleteRecipe,
 }) => {
   return (
     <div className="recipe">
@@ -16,7 +18,9 @@ const Recipe: React.FC<Props> = ({
         <h3 className="recipe__title">{name}</h3>
         <div>
           <button className="btn btn--primary mr-1">Edit</button>
-          <button className="btn btn--danger">Delete</button>
+          <button className="btn btn--danger" onClick={() => deleteRecipe(id)}>
+            Delete
+          </button>
         </div>
       </div>
       <div className="recipe__row">

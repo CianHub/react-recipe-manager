@@ -8,7 +8,7 @@ function App() {
 
   const handleAddRecipe = (): void => {
     const newRecipe: RecipeType = {
-      id: RecipeList.length + 1,
+      id: RecipeList.length + 2,
       name: 'Name',
       servings: 1,
       cookTime: '1:00',
@@ -25,9 +25,19 @@ function App() {
     setRecipes([...recipes, newRecipe]);
   };
 
+  const handleDeleteRecipe = (id: number): void => {
+    const newRecipes = recipes.filter((recipe: RecipeType) => recipe.id !== id);
+
+    setRecipes(newRecipes);
+  };
+
   return (
     <div className="App">
-      <RecipeList recipes={recipes} addRecipe={handleAddRecipe} />
+      <RecipeList
+        recipes={recipes}
+        addRecipe={handleAddRecipe}
+        deleteRecipe={handleDeleteRecipe}
+      />
     </div>
   );
 }

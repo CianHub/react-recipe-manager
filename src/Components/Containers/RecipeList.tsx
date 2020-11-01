@@ -5,14 +5,19 @@ import { RecipeType } from '../Types/RecipeType.model';
 interface Props {
   recipes: RecipeType[];
   addRecipe: () => void;
+  deleteRecipe: (id: number) => void;
 }
 
-const RecipeList: React.FC<Props> = ({ recipes, addRecipe }) => {
+const RecipeList: React.FC<Props> = ({ recipes, addRecipe, deleteRecipe }) => {
   return (
     <div className="recipe-list">
       <div>
         {recipes.map((recipe: RecipeType) => (
-          <Recipe key={recipe.id + recipe.name} recipe={recipe} />
+          <Recipe
+            key={recipe.id + recipe.name}
+            recipe={recipe}
+            deleteRecipe={deleteRecipe}
+          />
         ))}
       </div>
       <div className="recipe-list__add-recipe-btn-container">
