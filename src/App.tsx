@@ -46,10 +46,12 @@ export const mockRecipes: RecipeType[] = [
 export const RecipeUpdateContext = React.createContext<{
   addRecipe: () => void;
   deleteRecipe: (id: number) => void;
-}>({ addRecipe: () => {}, deleteRecipe: () => {} });
+  selectRecipe: (id: number) => void;
+}>({ addRecipe: () => {}, deleteRecipe: () => {}, selectRecipe: () => {} });
 
 function App() {
   const [recipes, setRecipes] = useState(mockRecipes);
+  const [selectedRecipeId, setSelectedRecipeId] = useState<number>();
 
   useEffect(() => {
     if (localStorage.getItem(LOCAL_STORAGE_KEY)) {
@@ -63,6 +65,10 @@ function App() {
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(recipes));
   }, [recipes]);
+
+  const selectedRecipe: RecipeType | undefined = recipes.find(
+    (recipe: RecipeType) => recipe.id === selectedRecipeId
+  );
 
   const addRecipe = (): void =>
     setRecipes([
@@ -86,16 +92,21 @@ function App() {
   const deleteRecipe = (id: number): void =>
     setRecipes(recipes.filter((recipe) => recipe.id !== id));
 
-  const recipeContextValue = {
+  const selectRecipe = (id: number): void => setSelectedRecipeId(id);
+
+  console.log(selectedRecipe);
+
+  const recipeContext = {
     addRecipe,
     deleteRecipe,
+    selectRecipe,
   };
 
   return (
-    <RecipeUpdateContext.Provider value={recipeContextValue}>
+    <RecipeUpdateContext.Provider value={recipeContext}>
       <div className="App">
         <RecipeList recipes={recipes} />
-        <RecipeEdit />
+        <RecipeEdit recipe={selectedRecipe as RecipeType} />
       </div>
     </RecipeUpdateContext.Provider>
   );

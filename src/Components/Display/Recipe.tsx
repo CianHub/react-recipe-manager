@@ -1,23 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { RecipeType } from '../../Types/RecipeType.model';
 import IngredientList from './IngredientList';
 
 import '../../App.css';
+import { RecipeUpdateContext } from '../../App';
 interface Props {
   recipe: RecipeType;
-  deleteRecipe: (id: number) => void;
 }
 
 const Recipe: React.FC<Props> = ({
   recipe: { id, name, servings, cookTime, instructions, ingredients },
-  deleteRecipe,
 }) => {
+  const { deleteRecipe, selectRecipe } = useContext(RecipeUpdateContext);
+
   return (
     <div className="recipe">
       <div className="recipe__header">
         <h3 className="recipe__title">{name}</h3>
         <div>
-          <button className="btn btn--primary mr-1">Edit</button>
+          <button
+            className="btn btn--primary mr-1"
+            onClick={() => selectRecipe(id)}
+          >
+            Edit
+          </button>
           <button className="btn btn--danger" onClick={() => deleteRecipe(id)}>
             Delete
           </button>

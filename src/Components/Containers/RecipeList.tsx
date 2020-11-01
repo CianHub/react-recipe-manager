@@ -8,17 +8,13 @@ interface Props {
 }
 
 const RecipeList: React.FC<Props> = ({ recipes }) => {
-  const { addRecipe, deleteRecipe } = useContext(RecipeUpdateContext);
+  const { addRecipe } = useContext(RecipeUpdateContext);
 
   return (
     <div className="recipe-list">
       <div>
         {recipes.map((recipe: RecipeType) => (
-          <Recipe
-            deleteRecipe={deleteRecipe}
-            key={recipe.id + recipe.name}
-            recipe={recipe}
-          />
+          <Recipe key={recipe.id + recipe.name} recipe={recipe} />
         ))}
       </div>
       <div className="recipe-list__add-recipe-btn-container">

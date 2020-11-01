@@ -1,7 +1,10 @@
 import React from 'react';
+import { RecipeType } from '../../Types/RecipeType.model';
 import RecipeEditIngredient from '../Display/RecipeIngredientEdit';
 
-interface Props {}
+interface Props {
+  recipe: RecipeType;
+}
 
 const RecipeEdit: React.FC<Props> = () => {
   return (
